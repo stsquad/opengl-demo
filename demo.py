@@ -48,6 +48,7 @@ class Demo(object):
 
         self.logo_a = logo(100, 100)
         self.logo_b = logo(200, 200)
+        self.logo_c = logo(200, 200, "zel.jpg")
 
         # Initialise the OpenGL stuff
         glViewport(0, 0, self.size[0], self.size[1])
@@ -114,12 +115,13 @@ class Demo(object):
         dx = sx * self.size[0]/2
         sx_top = sin(radians(x/4)+pi)
         dx_top = sx_top *self.size[0]/2
-        print "x => %d => %f => %f" % (x, sx, dx)
+        # print "x => %d => %f => %f" % (x, sx, dx)
 
         self.logo_a.draw(0, 0)
         self.logo_b.draw(100 + dx, 100)
         self.logo_a.draw(0, 200)
         self.logo_a.draw(0, 400+dx_top)
+        self.logo_c.draw(-100 +dx/2, -100+dx_top/2)
 
         glBegin(GL_POLYGON)
         glVertex3i(200,200, 0)
