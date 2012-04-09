@@ -2,6 +2,7 @@
 #
 
 import sys
+from math import radians, sin, pi
 import pygame
 from pygame.locals import *
 
@@ -12,6 +13,18 @@ try:
 except:
   print "ERROR: PyOpenGL not installed properly."
 
+
+# Handy for running in place
+from os.path import realpath,dirname
+script=realpath(sys.argv[0])
+devlibs=dirname(script)+"/lib"
+if os.path.exists(devlibs):
+    print "Adding "+devlibs+" to path"
+    sys.path.insert(0, devlibs)
+else:
+    print "sys.argv[0] is %s" % (realpath(dirname(sys.argv[0])))
+
+from logo import logo
 
 class Demo(object):
     # Run flag
@@ -32,6 +45,9 @@ class Demo(object):
         pygame.init()
         self.screen = pygame.display.set_mode(self.size,self.flags)
         self.clock = pygame.time.Clock()
+
+        self.logo_a = logo(100, 100)
+        self.logo_b = logo(200, 200)
 
         # Initialise the OpenGL stuff
         glViewport(0, 0, self.size[0], self.size[1])
@@ -92,12 +108,18 @@ class Demo(object):
         
         glColor3f (1.0, 1.0, 1.0)
 
-        glBegin(GL_POLYGON)
-        glVertex3i(200,100, 0)
-        glVertex3i(-200,100, 0)
-        glVertex3i(-200,-100, 0)
-        glVertex3i(200,-100, 0)
-        glEnd()
+        # draw a logo
+        x = pygame.time.get_ticks()
+        sx = sin(radians(x/4))
+        dx = sx * self.size[0]/2
+        sx_top = sin(radians(x/4)+pi)
+        dx_top = sx_top *self.size[0]/2
+        print "x => %d => %f => %f" % (x, sx, dx)
+
+        self.logo_a.draw(0, 0)
+        self.logo_b.draw(100 + dx, 100)
+        self.logo_a.draw(0, 200)
+        self.logo_a.draw(0, 400+dx_top)
 
         glBegin(GL_POLYGON)
         glVertex3i(200,200, 0)
