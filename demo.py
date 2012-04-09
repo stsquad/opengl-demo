@@ -47,8 +47,9 @@ class Demo(object):
         self.clock = pygame.time.Clock()
 
         self.logo_a = logo(100, 100)
-        self.logo_b = logo(200, 200)
+        self.logo_b = logo(150, 150)
         self.logo_c = logo(200, 200, "zel.jpg")
+        self.logo_d = logo(path="OpenGL_logo.jpg")
 
         # Initialise the OpenGL stuff
         glViewport(0, 0, self.size[0], self.size[1])
@@ -117,17 +118,11 @@ class Demo(object):
         dx_top = sx_top *self.size[0]/2
         # print "x => %d => %f => %f" % (x, sx, dx)
 
-        self.logo_a.draw(0, 0)
+        self.logo_a.draw(100, -100)
         self.logo_b.draw(100 + dx, 100)
-        self.logo_a.draw(0, 200)
-        self.logo_a.draw(0, 400+dx_top)
         self.logo_c.draw(-100 +dx/2, -100+dx_top/2)
+        self.logo_d.draw(-100 +dx, 100+dx_top/2)
 
-        glBegin(GL_POLYGON)
-        glVertex3i(200,200, 0)
-        glVertex3i(300,300, 0)
-        glVertex3i(400,200, 0)
-        glEnd()
 
         glFlush()
 

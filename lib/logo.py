@@ -20,8 +20,9 @@ class logo(object):
     size_y = 0
     texture = None
     
-    def __init__(self, size_x, size_y, path=None):
+    def __init__(self, size_x=None, size_y=None, path=None):
         self.counter = 0
+
         self.size_x = size_x
         self.size_y = size_y
 
@@ -43,6 +44,14 @@ class logo(object):
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
 
             print "logo:__init__ with texture id %d" % (self.texture)
+
+            if self.size_x == None:
+                self.size_x = ix
+
+            if self.size_y == None:
+                self.size_y = iy
+
+
 
             
     def next(self):
